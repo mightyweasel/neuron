@@ -1,0 +1,145 @@
+{
+   "link": {
+      "link1": {
+         "line": "http://github.com/mightyweasel/neuron/ ",
+         "lineno": 41
+      },
+      "link2": {
+         "line": "https://www.canada.ca",
+         "lineno": 45
+      }
+   },
+   "page": {
+      "page1": {
+         "content": "///\n### general\n\nHey! This is neuron. It turns your chaotic notes and turns them into manageable and sorted chunks.\n\nIt's also pretty.\n",
+         "line": "///",
+         "lineno": 1,
+         "topic": "topic1"
+      },
+      "page2": {
+         "content": "///////\n\nYou can add new pages with a bunch of \"/\", three will do, but go nuts it's ok, dont need to be careful\n\n### How neuron works\n\nTopics are three \"#\" in a row, they're like waypoint markers. You can use them to figure out what is where.\n\nOf course everyone has TODO items. If you need a todo, you put it on a line like this\n\nTODO This is a regular todo\nTODO 3/14 this has a date, so it will probably float to the top\nTODO WHATEVER is a neat way \nTODO WHATEVER to group todos, sorting and all you know\n",
+         "line": "///////",
+         "lineno": 8,
+         "todo": "todo1,todo2,todo3,todo4,todo5",
+         "topic": "topic2"
+      },
+      "page3": {
+         "content": "///////\n\n### What about doing things\n\nWhen you finish a todo just mark it done\n\nTODO done I totally this is already\n\nWhat about urgent stuff??\n\nTODO urgent Find out how to make something urgent!\n\nIf you're gonna do it later?\n\nTODO later I'll totally get to this sometime\n",
+         "line": "///////",
+         "lineno": 23,
+         "todo": "todo6,todo7,todo8",
+         "topic": "topic3"
+      },
+      "page4": {
+         "content": "/////\n\nhttp://github.com/mightyweasel/neuron/ \nWe all love links, that was a link. You can drop em basically anywhere.\n\nOnly catch... they gotta be at the start of the line (for now), also they need the full address, not just www\nhttps://www.canada.ca\n\n### How do I find stuff\n\nIt's a plain static page, no fancy stuff. Except maybe materializecss which makes it pretty and the python in the bushes that makes it snappy.\n\nJust use CTRL+F and type what you need. page, topic, etc. You'll get the hang of it.\n\nWhat about all this \"Line\" stuff. You go into notepad and look at this notepad file youre reading. Then CTRL+G and type the line number. You should now be on that line. \n\n### How do I use it?\n\nYou need python. But if you have it just \"python neuron.py neuron_this_example.txt\"\n\nAnd then neuron_this_example.html should pop out. Open that and you're good to go :)",
+         "line": "/////",
+         "lineno": 39,
+         "link": "link1,link2",
+         "topic": "topic4,topic5"
+      }
+   },
+   "todo": {
+      "done": {
+         "todo6": {
+            "line": "I totally this is already",
+            "lineno": 29
+         }
+      },
+      "later": {
+         "todo8": {
+            "line": "I'll totally get to this sometime",
+            "lineno": 37
+         }
+      },
+      "ondeck": {
+         "todo1": {
+            "line": "urse everyone has TODO items. If you need a todo, you put it on a line like this",
+            "lineno": 16
+         },
+         "todo2": {
+            "line": "This is a regular todo",
+            "lineno": 18
+         },
+         "todo3": {
+            "line": "3/14 this has a date, so it will probably float to the top",
+            "lineno": 19
+         },
+         "todo4": {
+            "line": "WHATEVER is a neat way ",
+            "lineno": 20
+         },
+         "todo5": {
+            "line": "WHATEVER to group todos, sorting and all you know",
+            "lineno": 21
+         }
+      },
+      "todo1": {
+         "line": "Of course everyone has TODO items. If you need a todo, you put it on a line like this",
+         "lineno": 16
+      },
+      "todo2": {
+         "line": "TODO This is a regular todo",
+         "lineno": 18
+      },
+      "todo3": {
+         "line": "TODO 3/14 this has a date, so it will probably float to the top",
+         "lineno": 19
+      },
+      "todo4": {
+         "line": "TODO WHATEVER is a neat way ",
+         "lineno": 20
+      },
+      "todo5": {
+         "line": "TODO WHATEVER to group todos, sorting and all you know",
+         "lineno": 21
+      },
+      "todo6": {
+         "line": "TODO done I totally this is already",
+         "lineno": 29
+      },
+      "todo7": {
+         "line": "TODO urgent Find out how to make something urgent!",
+         "lineno": 33
+      },
+      "todo8": {
+         "line": "TODO later I'll totally get to this sometime",
+         "lineno": 37
+      },
+      "urgent": {
+         "todo7": {
+            "line": "Find out how to make something urgent!",
+            "lineno": 33
+         }
+      }
+   },
+   "topic": {
+      "topic1": {
+         "line": "### general",
+         "lineno": 2,
+         "page": "page1"
+      },
+      "topic2": {
+         "line": "### How neuron works",
+         "lineno": 12,
+         "page": "page2",
+         "todo": "todo1,todo2,todo3,todo4,todo5"
+      },
+      "topic3": {
+         "line": "### What about doing things",
+         "lineno": 25,
+         "link": "link1,link2",
+         "page": "page3",
+         "todo": "todo6,todo7,todo8"
+      },
+      "topic4": {
+         "line": "### How do I find stuff",
+         "lineno": 47,
+         "page": "page4"
+      },
+      "topic5": {
+         "line": "### How do I use it?",
+         "lineno": 55,
+         "page": "page4"
+      }
+   }
+}

@@ -1,0 +1,56 @@
+Hey! This is neuron. It turns your chaotic notes and turns them into manageable and sorted chunks.
+
+It's also pretty.
+
+///////
+
+You can add new pages with a bunch of "/", three will do, but go nuts it's ok, dont need to be careful
+
+### How neuron works
+
+Topics are three "#" in a row, they're like waypoint markers. You can use them to figure out what is where.
+
+Of course everyone has TODO items. If you need a todo, you put it on a line like this
+
+TODO This is a regular todo
+TODO 3/14 this has a date, so it will probably float to the top
+TODO WHATEVER is a neat way 
+TODO WHATEVER to group todos, sorting and all you know
+
+///////
+
+### What about doing things
+
+When you finish a todo just mark it done
+
+TODO done I totally this is already
+
+What about urgent stuff??
+
+TODO urgent Find out how to make something urgent!
+
+If you're gonna do it later?
+
+TODO later I'll totally get to this sometime
+
+/////
+
+http://github.com/mightyweasel/neuron/ 
+We all love links, that was a link. You can drop em basically anywhere.
+
+Only catch... they gotta be at the start of the line (for now), also they need the full address, not just www
+https://www.canada.ca
+
+### How do I find stuff
+
+It's a plain static page, no fancy stuff. Except maybe materializecss which makes it pretty and the python in the bushes that makes it snappy.
+
+Just use CTRL+F and type what you need. page, topic, etc. You'll get the hang of it.
+
+What about all this "Line" stuff. You go into notepad and look at this notepad file youre reading. Then CTRL+G and type the line number. You should now be on that line. 
+
+### How do I use it?
+
+You need python. But if you have it just "python neuron.py neuron_this_example.txt"
+
+And then neuron_this_example.html should pop out. Open that and you're good to go :)
