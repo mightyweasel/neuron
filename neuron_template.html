@@ -38,19 +38,19 @@
                 <div class="row center">
                     <a href="#pages" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        Pages
+                        Pages <span data-badge-caption="" class="new badge grey">[CODON_COUNT_PAGES]</span>
                     </a>
                     <a href="#topics" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        Topics
+                        Topics <span data-badge-caption="" class="new badge grey">[CODON_COUNT_TOPICS]</span>
                     </a>
                     <a href="#links" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        Links
+                        Links <span data-badge-caption="" class="new badge grey">[CODON_COUNT_LINKS]</span>
                     </a>
                     <a href="#todos" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        TODOs
+                        TODOs <span data-badge-caption="" class="new badge grey">[CODON_COUNT_TODOS]</span>
                     </a>
                 </div>
                 <br><br>
@@ -200,9 +200,16 @@
         </a>
     </div>
     <div>
-        <code>
-        [CODON_CONSOLE]
-        </code>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea rows="5" id="textarea1" class="materialize-textarea">[CODON_CONSOLE]</textarea>
+                        <label for="textarea1">Raw Text</label>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

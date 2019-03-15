@@ -88,7 +88,7 @@ g_current_link = ""
 # dump current neuron to string
 
 def by_line(elem):
-    return elem['line']
+    return elem['line'].lower()
 
 def neuron_tostring(stype, line):
     if debug_mode == True:
@@ -370,26 +370,27 @@ def neuron_conv_html(htmlsnip, stype):
     }
     return_html = ""
     #for todo in sorted(g_neurons[stype].values(), key=byLine):
-    for nitem in g_neurons[stype]:
-        #print(g_neurons[stype][nitem])
-        
-        content['title'] = nitem
+    if stype in g_neurons:
+        for nitem in g_neurons[stype]:
+            #print(g_neurons[stype][nitem])
+            
+            content['title'] = nitem
 
-        if stype == 'link':# in g_neurons[stype][nitem]:
-            content['href'] = neuron_cleanurl(g_neurons[stype][nitem]['line'])
-        if 'lineno' in g_neurons[stype][nitem]:
-            content['lineno'] = g_neurons[stype][nitem]['lineno']
-        if 'topic' in g_neurons[stype][nitem]:
-            content['topic'] = ", ".join( dereference_neuron(g_neurons[stype][nitem]['topic'], 'line' ) ).replace("###","")
-        if 'page' in g_neurons[stype][nitem]:
-            content['page'] = g_neurons[stype][nitem]['page']
-        if 'content' in g_neurons[stype][nitem]:
-            content['content'] = (g_neurons[stype][nitem]['content']).replace('\n', '<br>')
-        else:
-            if 'line' in g_neurons[stype][nitem]:
-                content['content'] = g_neurons[stype][nitem]['line'].replace("###","")
-        # done, now package
-        return_html = return_html + neuron_pkg_html(htmlsnip, content)
+            if stype == 'link':# in g_neurons[stype][nitem]:
+                content['href'] = neuron_cleanurl(g_neurons[stype][nitem]['line'])
+            if 'lineno' in g_neurons[stype][nitem]:
+                content['lineno'] = g_neurons[stype][nitem]['lineno']
+            if 'topic' in g_neurons[stype][nitem]:
+                content['topic'] = ", ".join( dereference_neuron(g_neurons[stype][nitem]['topic'], 'line' ) ).replace("###","")
+            if 'page' in g_neurons[stype][nitem]:
+                content['page'] = g_neurons[stype][nitem]['page']
+            if 'content' in g_neurons[stype][nitem]:
+                content['content'] = (g_neurons[stype][nitem]['content']).replace('\n', '<br>')
+            else:
+                if 'line' in g_neurons[stype][nitem]:
+                    content['content'] = g_neurons[stype][nitem]['line'].replace("###","")
+            # done, now package
+            return_html = return_html + neuron_pkg_html(htmlsnip, content)
     return return_html
 
 # convert json to html for todos
@@ -398,22 +399,22 @@ def neuron_conv_html(htmlsnip, stype):
 def neuron_pkg_topic_html():
     snip_html_topic_block_pkg = ""
     html_topics_dump = ""
-    
-    for topic in sorted(g_neurons['topic'].values(), key=by_line):
-        
-        snip_html_topic_new = snip_html_topic.replace(
-            '[CODON_CONTENT]', topic['line'].replace("###",""))  # g_neurons['topic'][topic]["line"])
-        snip_html_topic_new = snip_html_topic_new.replace(
-            # str(g_neurons['topic'][topic]["lineno"])
-            "[CODON_LINENO]", str(topic['lineno'])
-        )
-        snip_html_topic_new = snip_html_topic_new.replace(
-            "[CODON_TITLE]", ""#topic['title']
-        )
-        snip_html_topic_new = snip_html_topic_new.replace(
-            "[CODON_CONTENT_PAGE]",  topic['page']
-        )
-        html_topics_dump = html_topics_dump + snip_html_topic_new
+    if 'topic' in g_neurons:
+        for topic in sorted(g_neurons['topic'].values(), key=by_line):
+            
+            snip_html_topic_new = snip_html_topic.replace(
+                '[CODON_CONTENT]', topic['line'].replace("###",""))  # g_neurons['topic'][topic]["line"])
+            snip_html_topic_new = snip_html_topic_new.replace(
+                # str(g_neurons['topic'][topic]["lineno"])
+                "[CODON_LINENO]", str(topic['lineno'])
+            )
+            snip_html_topic_new = snip_html_topic_new.replace(
+                "[CODON_TITLE]", ""#topic['title']
+            )
+            snip_html_topic_new = snip_html_topic_new.replace(
+                "[CODON_CONTENT_PAGE]",  topic['page']
+            )
+            html_topics_dump = html_topics_dump + snip_html_topic_new
     # done now block package
     #snip_html_topic_block_pkg = snip_html_topic_block.replace(
     #    "[CODON_BLOCK]", html_topics_dump)
@@ -425,7 +426,7 @@ def neuron_pkg_todo_html(state):
     global g_statecolor
     snip_html_todo_block_pkg = ""
     html_todos_dump = ""
-    if state in g_neurons['todo']:
+    if 'todo' in g_neurons and state in g_neurons['todo']:
         #sorted_d = sorted(().items(), key=lambda x: x[1])
 
         for todo in sorted(g_neurons['todo'][state].values(), key=by_line):
@@ -441,6 +442,8 @@ def neuron_pkg_todo_html(state):
         snip_html_todo_block_pkg = snip_html_todo_block.replace(
             "[CODON_BLOCK]", html_todos_dump)
     return snip_html_todo_block_pkg
+
+#########################################################
 # run it
 neuron_scan()
 
@@ -470,6 +473,26 @@ snip_html_todo_container_pkg = snip_html_todo_container_pkg.replace(
     "[CODON_TODO_LATER]", snip_html_todo_snip_block_pkg_later)
 snip_html_todo_container_pkg = snip_html_todo_container_pkg.replace(
     "[CODON_TODO_DONE]", snip_html_todo_snip_block_pkg_done)
+
+# assign metrics
+def assign_todo_badges(CODON, state, htmlpkg):
+    global g_neurons
+    val = 0
+    if 'todo' in g_neurons and state in g_neurons['todo']:
+        val = len(g_neurons['todo'][state])
+    return htmlpkg.replace(CODON, str(val)) + "\n"
+
+
+snip_html_todo_container_pkg = assign_todo_badges(
+    "[CODON_COUNT_TODO_URGENT]", "urgent", snip_html_todo_container_pkg)
+snip_html_todo_container_pkg = assign_todo_badges(
+    "[CODON_COUNT_TODO_ONDECK]", "ondeck", snip_html_todo_container_pkg)
+snip_html_todo_container_pkg = assign_todo_badges(
+    "[CODON_COUNT_TODO_LATER]", "later", snip_html_todo_container_pkg)
+snip_html_todo_container_pkg = assign_todo_badges(
+    "[CODON_COUNT_TODO_DONE]", "done", snip_html_todo_container_pkg)
+
+
 # Build HTML
 jsontemplate = json.dumps(g_neurons, sort_keys=True, indent=3)
 htmltemplate = htmltemplate.replace(
@@ -481,6 +504,8 @@ htmltemplate = htmltemplate.replace(
 htmltemplate = htmltemplate.replace(
     "[CODON_NEURON_TODOS]", snip_html_todo_container_pkg) + "\n"
 
+
+
 # write files
 writefilensrc = out_file
 writefilejson = 'neuron.json'
@@ -491,9 +516,31 @@ writefilejson = 'neuron.json'
 with open(writefilejson, 'w') as the_file:
     the_file.write(jsontemplate)
 
-htmltemplate = htmltemplate.replace(
-    "[CODON_CONSOLE]", contents.replace("\n","<br>")) + "\n"
-jsontemplate
+# write console
+htmltemplate = htmltemplate.replace("[CODON_CONSOLE]", contents) + "\n"
+# write counts 
+def get_todo_count_status():
+    tododone = 0
+    todoondeck = 0
+    todourgent = 0
+    todolater = 0
+    if 'done' in g_neurons['todo']:
+        tododone = len(g_neurons['todo']['done'])
+    if 'ondeck' in g_neurons['todo']:
+        todoondeck = len(g_neurons['todo']['ondeck'])
+    if 'urgent' in g_neurons['todo']:
+        todourgent = len(g_neurons['todo']['urgent'])
+    if 'later' in g_neurons['todo']:
+        todolater = len(g_neurons['todo']['later'])
+    todocounttotal = todourgent + todoondeck + todolater + tododone
+    todocount = todourgent + todoondeck + todolater
+    return str(todocount) + " / " + str(todocounttotal)
+
+htmltemplate = htmltemplate.replace("[CODON_COUNT_TODOS]", get_todo_count_status()) + "\n"
+htmltemplate = htmltemplate.replace("[CODON_COUNT_PAGES]", str(mm['cx']['page'])) + "\n"
+htmltemplate = htmltemplate.replace("[CODON_COUNT_TOPICS]", str(mm['cx']['topic'])) + "\n"
+htmltemplate = htmltemplate.replace("[CODON_COUNT_LINKS]", str(mm['cx']['link'])) + "\n"
+
 
 with open(writefilensrc, 'w') as the_file:
     the_file.write(htmltemplate)

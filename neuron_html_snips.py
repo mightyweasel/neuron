@@ -31,10 +31,10 @@ snip_html_topic = """
 snip_html_todo_container = """
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s3"><a href="#test1"><i class="material-icons">whatshot</i>URGENT</a></li>
-        <li class="tab col s3"><a href="#test2"><i class="material-icons">grade</i>On Deck</a></li>
-        <li class="tab col s3"><a href="#test3"><i class="material-icons">filter_drama</i>Later</a></li>
-        <li class="tab col s3"><a href="#test4"><i class="material-icons">place</i>Done</a></li>
+        <li class="tab col s3"><a href="#test1"><i class="material-icons">whatshot</i>NOW! <span data-badge-caption="" class="new badge red">[CODON_COUNT_TODO_URGENT]</span></a></li>
+        <li class="tab col s3"><a href="#test2"><i class="material-icons">grade</i>Active <span data-badge-caption="" class="new badge blue">[CODON_COUNT_TODO_ONDECK]</span></a></li>
+        <li class="tab col s3"><a href="#test3"><i class="material-icons">filter_drama</i>Later <span data-badge-caption="" class="new badge grey">[CODON_COUNT_TODO_LATER]</span></a></li>
+        <li class="tab col s3"><a href="#test4"><i class="material-icons">place</i>Done <span data-badge-caption="" class="new badge green">[CODON_COUNT_TODO_DONE]</span></a></li>
       </ul>
     </div>
     <div id="test1" class="col s12">[CODON_TODO_URGENT]</div>
