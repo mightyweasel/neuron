@@ -2,6 +2,10 @@
 ###########################################################
 # HTML SNIPPETS
 
+snip_html_badge_texted = """
+<span data-badge-caption="" class="new badge [CODON_BADGE_COLOR]" style="float: none;margin:3px;">[CODON_BADGE_TEXT]</span>
+"""
+
 # topic block [CODON_BLOCK]
 # topic [CODON_TITLE, CODON_CONTENT]
 snip_html_topic_block = """

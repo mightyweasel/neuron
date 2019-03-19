@@ -38,19 +38,19 @@
                 <div class="row center">
                     <a href="#pages" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        Pages <span data-badge-caption="" class="new badge grey">[CODON_COUNT_PAGES]</span>
+                        Pages <span data-badge-caption="" class="new badge orange">[CODON_COUNT_PAGES]</span>
                     </a>
                     <a href="#topics" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        Topics <span data-badge-caption="" class="new badge grey">[CODON_COUNT_TOPICS]</span>
+                        Topics <span data-badge-caption="" class="new badge orange">[CODON_COUNT_TOPICS]</span>
                     </a>
                     <a href="#links" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        Links <span data-badge-caption="" class="new badge grey">[CODON_COUNT_LINKS]</span>
+                        Links <span data-badge-caption="" class="new badge orange">[CODON_COUNT_LINKS]</span>
                     </a>
                     <a href="#todos" id="download-button"
                         class="btn-large waves-effect waves-light teal lighten-1 col s6 md4">
-                        TODOs <span data-badge-caption="" class="new badge grey">[CODON_COUNT_TODOS]</span>
+                        TODOs <span data-badge-caption="" class="new badge red">[CODON_COUNT_TODOS]</span>
                     </a>
                 </div>
                 <br><br>
@@ -66,8 +66,11 @@
             <div class="row">
                 <div class="col s12 center">
                     <h3><i class="mdi-content-send brown-text"></i></h3>
-                    <h4>Aggregated TODOs</h4>
                     <p class="left-align light">All your tasks you've jotted appear here</p>
+                    <h5>TODO Progress</h5>
+                    <div class="progress">
+                        <div class="determinate" style="width: [CODON_TODO_PERCENT]%"></div>
+                    </div>
                 </div>
             </div>
             <div class="row">

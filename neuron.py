@@ -14,11 +14,14 @@ print(f"- Args: {str(sys.argv)}")
 load_file = "neuron_this.txt" # default file name
 out_file = "neuron_this.html" # default file name
 switch_show = False
+switch_json = False
 if(len(sys.argv) > 1):
     load_file = sys.argv[1]
     out_file = load_file.replace(".txt",".html")
     if "--show" in sys.argv:
         switch_show = True
+    if "--show" in sys.argv:
+        switch_json = True
 
 # open file lorem.txt for reading text data
 print(f"- Loading neuron file...")
@@ -27,7 +30,6 @@ contents = in_file.read()         # read the entire file into a string variable
 in_file.close()                   # close the file
 content_prepend = """///
 ### general
-
 """
 contents = content_prepend + contents
 print(f"- Parsing neuron file...")
@@ -284,7 +286,7 @@ def neuron_scan():
     global g_neurons
     # split the input lines from the text
     content_arr = contents.split('\n')
-    g_current_lineno = 1
+    g_current_lineno = 0 # for the added two lines in the beginning
     for line in content_arr:
         neuron_link("page", line, neuron_link_page)
         neuron_link("topic", line, neuron_link_topic)
@@ -512,9 +514,9 @@ writefilejson = 'neuron.json'
 
 ###########################################################
 # WRITE OUTPUT
-
-with open(writefilejson, 'w') as the_file:
-    the_file.write(jsontemplate)
+if switch_json == True:
+    with open(writefilejson, 'w') as the_file:
+        the_file.write(jsontemplate)
 
 # write console
 htmltemplate = htmltemplate.replace("[CODON_CONSOLE]", contents) + "\n"
@@ -534,13 +536,28 @@ def get_todo_count_status():
         todolater = len(g_neurons['todo']['later'])
     todocounttotal = todourgent + todoondeck + todolater + tododone
     todocount = todourgent + todoondeck + todolater
-    return str(todocount) + " / " + str(todocounttotal)
+    cstat = {
+        "label": str(todocount) + " / " + str(todocounttotal),
+        "percent": int((1 - (todocount/todocounttotal))*100)
+    }
+    #print(f"{cstat['percent']} {cstat['label']}")
+    return cstat
 
-htmltemplate = htmltemplate.replace("[CODON_COUNT_TODOS]", get_todo_count_status()) + "\n"
+htmltemplate = htmltemplate.replace("[CODON_TODO_PERCENT]", str((get_todo_count_status())['percent']))
+htmltemplate = htmltemplate.replace("[CODON_COUNT_TODOS]", str((get_todo_count_status())['label'])) + "\n"
 htmltemplate = htmltemplate.replace("[CODON_COUNT_PAGES]", str(mm['cx']['page'])) + "\n"
 htmltemplate = htmltemplate.replace("[CODON_COUNT_TOPICS]", str(mm['cx']['topic'])) + "\n"
 htmltemplate = htmltemplate.replace("[CODON_COUNT_LINKS]", str(mm['cx']['link'])) + "\n"
 
+# started badge
+htmltemplate = htmltemplate.replace(
+    "(started)", snip_html_badge_texted.replace("[CODON_BADGE_TEXT]", "started").replace("[CODON_BADGE_COLOR]", "green"))
+htmltemplate = htmltemplate.replace(
+    "(asked)", snip_html_badge_texted.replace("[CODON_BADGE_TEXT]", "asked").replace("[CODON_BADGE_COLOR]", "orange"))
+htmltemplate = htmltemplate.replace(
+    "(delisted)", snip_html_badge_texted.replace("[CODON_BADGE_TEXT]", "delisted").replace("[CODON_BADGE_COLOR]", "grey"))
+htmltemplate = htmltemplate.replace(
+    "(ondeck)", snip_html_badge_texted.replace("[CODON_BADGE_TEXT]", "ondeck").replace("[CODON_BADGE_COLOR]", "blue"))
 
 with open(writefilensrc, 'w') as the_file:
     the_file.write(htmltemplate)
